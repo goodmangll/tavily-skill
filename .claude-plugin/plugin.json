@@ -2,5 +2,7 @@
   "name": "tavily-skill",
   "description": "Tavily web search, extraction, crawling, mapping, and research skill",
   "version": "0.1.0",
-  "skills": "../../skills/"
+  "author": {
+    "name": "goodmangll"
+  }
 }

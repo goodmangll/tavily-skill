@@ -1,19 +1,16 @@
 # Tavily Skill
 
-A cross-platform AI agent skill for Tavily web search, URL extraction, site mapping, crawling, and
-deep research. The CLI is Python 3 standard library only; it has no runtime package dependencies.
+A Python 3, standard-library-only skill for Tavily web search, URL extraction, site mapping,
+crawling, and deep research. The shared source of truth is [`skills/tavily/`](skills/tavily/).
 
-## Supported Platforms
+## Support Matrix
 
-| Platform | Package metadata |
-|---|---|
-| [Pi](https://pi.dev) | `package.json` `pi` manifest |
-| Claude Code | `adapters/claude/plugin.json` |
-| Codex | `adapters/codex/plugin.json` |
-| Cursor | `adapters/cursor/config.json` |
-
-The platform-agnostic source of truth is [`skills/tavily/`](skills/tavily/). Adapters only provide
-platform-specific discovery metadata; the skill instructions and CLI are not duplicated.
+| Platform | Status | Files | Installation or validation |
+|---|---|---|---|
+| [Pi](https://pi.dev) | Supported | `package.json` with `pi.skills` | `pi install git:github.com/goodmangll/tavily-skill` |
+| Claude Code | Supported | `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json` | `claude plugin marketplace add goodmangll/tavily-skill`, then `claude plugin install tavily-skill@tavily-skill` |
+| Codex | Manifest included | `.codex-plugin/plugin.json` | Validate the current marketplace or plugin-browser installation flow before publishing a direct install command. |
+| Cursor | Not configured | None | Add support only after verifying its current official plugin format and end-to-end installation flow. |
 
 ## Configuration
 
@@ -32,38 +29,13 @@ api_keys:
 # output_dir: ~/.local/share/tavily/results
 ```
 
-The CLI follows the XDG Base Directory specification:
-
 | Purpose | Default location |
 |---|---|
 | User configuration | `${XDG_CONFIG_HOME:-~/.config}/tavily/config.yaml` |
 | Runtime state | `${XDG_STATE_HOME:-~/.local/state}/tavily/state.json` |
 | Results | `${XDG_DATA_HOME:-~/.local/share}/tavily/results/` |
 
-Keep `config.yaml` outside this repository. It contains your API credentials.
-
-## Install
-
-### Pi
-
-From a local checkout:
-
-```bash
-pi install /path/to/tavily-skill
-```
-
-From Git after publishing:
-
-```bash
-pi install git:github.com/<owner>/tavily-skill
-```
-
-Pi loads the skill from the `skills/` directory declared in `package.json`.
-
-### Claude Code, Codex, and Cursor
-
-Install this repository using each platform's plugin or skill workflow, pointing it at the respective
-metadata file under `adapters/`. Each adapter references the common `skills/` directory.
+Keep `config.yaml` outside this repository. It contains API credentials.
 
 ## Direct CLI Usage
 
@@ -85,18 +57,19 @@ payload inline, or use `--output <path>` to select a file location.
 npm test
 npm run check
 npm pack --dry-run
+claude plugin validate .
 ```
 
-`npm test` runs the configuration/path unit tests. `npm run check` also compiles the Python CLI.
+Tests cover the YAML/XDG configuration behavior and platform manifest layout. Before documenting a
+new host installation path, validate it end-to-end in that host and update the support matrix.
 
 ## Repository Layout
 
 ```text
 skills/tavily/                 # Canonical skill documentation and Python CLI
-adapters/pi/extensions/        # Pi resource-discovery adapter
-adapters/claude/plugin.json    # Claude Code metadata
-adapters/codex/plugin.json     # Codex metadata
-adapters/cursor/config.json    # Cursor metadata
+.claude-plugin/                # Claude Code plugin and marketplace metadata
+.codex-plugin/                 # Codex plugin metadata
+package.json                   # Pi package metadata
 ```
 
 ## License

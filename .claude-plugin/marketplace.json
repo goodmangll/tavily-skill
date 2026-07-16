@@ -1,0 +1,13 @@
+{
+  "name": "tavily-skill",
+  "description": "Tavily web search, extraction, crawling, mapping, and research skill",
+  "owner": {
+    "name": "goodmangll"
+  },
+  "plugins": [
+    {
+      "name": "tavily-skill",
+      "source": "./"
+    }
+  ]
+}

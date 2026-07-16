@@ -1,7 +1,7 @@
 {
   "name": "tavily-skill",
   "version": "0.1.0",
-  "description": "Cross-platform Tavily web search skill for AI coding agents",
+  "description": "Tavily web search skill for AI coding agents",
   "license": "MIT",
   "private": false,
   "keywords": [
@@ -9,33 +9,26 @@
     "tavily",
     "web-search",
     "pi-package",
-    "claude-plugin",
+    "claude-code-plugin",
     "codex-plugin"
   ],
   "files": [
     "skills/tavily/SKILL.md",
     "skills/tavily/config.example.yaml",
     "skills/tavily/tavily.py",
-    "adapters/",
+    ".claude-plugin/plugin.json",
+    ".claude-plugin/marketplace.json",
+    ".codex-plugin/plugin.json",
     "README.md",
     "LICENSE"
   ],
   "scripts": {
-    "test": "python3 -m unittest -v skills/tavily/test_tavily_config.py",
+    "test": "python3 -m unittest -v skills/tavily/test_tavily_config.py test_platform_layout.py",
     "check": "python3 -m py_compile skills/tavily/tavily.py && npm test"
   },
   "pi": {
-    "extensions": [
-      "adapters/pi/extensions"
-    ],
     "skills": [
       "skills"
     ]
-  },
-  "claude": {
-    "plugin": "adapters/claude/plugin.json"
-  },
-  "codex": {
-    "plugin": "adapters/codex/plugin.json"
   }
 }
