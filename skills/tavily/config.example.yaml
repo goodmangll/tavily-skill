@@ -1,0 +1,7 @@
+# Tavily API keys (required). Copy this file to ~/.config/tavily/config.yaml.
+api_keys:
+  - tvly-dev-xxx1
+  - tvly-dev-xxx2
+
+# Optional: override the default XDG data directory for generated results.
+# output_dir: ~/.local/share/tavily/results

@@ -1,0 +1,6 @@
+{
+  "name": "tavily-skill",
+  "version": "0.1.0",
+  "description": "Tavily web search, extraction, crawling, mapping, and research skill",
+  "skills": "../../skills/"
+}
